@@ -4,11 +4,9 @@
 AR      =ar
 ARFLAGS =-r
 
+CLANG   =clang
+#CALNG   =/home/lalitprasad/ECE5510/OpenCilk-2.0.0-x86_64-Linux-Ubuntu-20.04/bin/clang-14
 CC      =gcc
-#CCFLAGS =-Wall -g -std=c11
-#CCFLAGS =-Wall -g -std=c99
-#CCFLAGS =-Wall -g -std=c90
-#CCFLAGS =-Wall -g -ansi -Wpedantic
 CCFLAGS = -O3 -Wall -g -lpthread -fPIC -march=x86-64
 
 HDRS    = dque.h dque_util.h
@@ -39,29 +37,28 @@ test:	test.c dque_util.c dque_util.h $(LIBS)
 	$(CC) $(CCFLAGS) -DTTAS test.c dque_util.c dque_util.h $(LIBS) -o $@
 
 .PHONY : fib_test_ttas
-fib_test_ttas:	
-	#./clang -fopencilk -fcilktool=cilkscale -O3 fib_test.c -o fib_test
-	./clang -fopencilk $(CCFLAGS) -DTTAS fib_test.c -o fib_test_ttas
+fib_test_ttas:
+	$(CLANG) -fopencilk $(CCFLAGS) -DTTAS fib_test.c -o fib_test_ttas
 
 .PHONY : qsort_test_ttas
 qsort_test_ttas:	
-	./clang -fopencilk $(CCFLAGS) -DTTAS qsort_test.c -o qsort_test_ttas
+	$(CLANG) -fopencilk $(CCFLAGS) -DTTAS qsort_test.c -o qsort_test_ttas
 
 .PHONY : chess_test_ttas
 chess_test_ttas:	
-	./clang -fopencilk $(CCFLAGS) -DTTAS chess_test.c -o chess_test_ttas
+	$(CLANG) -fopencilk $(CCFLAGS) -DTTAS chess_test.c -o chess_test_ttas
 
 .PHONY : fib_test_lockfree
 fib_test_lockfree:	
-	./clang -fopencilk $(CCFLAGS) -DCMPXCHG fib_test.c -o fib_test_lockfree
+	$(CLANG) -fopencilk $(CCFLAGS) -DCMPXCHG fib_test.c -o fib_test_lockfree
 
 .PHONY : qsort_test_lockfree
 qsort_test_lockfree:	
-	./clang -fopencilk $(CCFLAGS) -DCMPXCHG qsort_test.c -o qsort_test_lockfree
+	$(CLANG) -fopencilk $(CCFLAGS) -DCMPXCHG qsort_test.c -o qsort_test_lockfree
 
 .PHONY : chess_test_lockfree
 chess_test_lockfree:	
-	./clang -fopencilk $(CCFLAGS) -DCMPXCHG chess_test.c -o chess_test_lockfree
+	$(CLANG) -fopencilk $(CCFLAGS) -DCMPXCHG chess_test.c -o chess_test_lockfree
 
 .PHONY : clean
 clean:
