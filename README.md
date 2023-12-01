@@ -12,10 +12,10 @@ ECE5510/CS5510 Fall2023 - Assignment #3
 
 ### Deliverables**
 You should implement:
-*one lock-based dequeue (35% of your grade)
-*one lock-free dequeue (35%) of your grade
-*You should also provide a report with your findings and an explanation for them (15%).
-*Report.pdf (15%)
+* one lock-based dequeue (35% of your grade) - *Done*
+* one lock-free dequeue (35%) of your grade  - *Done*
+* You should also provide a report with your findings and an explanation for them (15%). - *Done*
+* Report.pdf (15%) - *Done*
 
 ### Results
 ##### |--------------------------------------
