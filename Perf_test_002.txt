@@ -1,0 +1,497 @@
+rm -f *.o
+rm -f *~
+rm -rf test
+rm -rf *test_ttas
+rm -rf *test_lockfree
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_create.c -o dque_create.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_destroy.c -o dque_destroy.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_error.c -o dque_error.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_options.c -o dque_options.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_empty.c -o dque_empty.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_size.c -o dque_size.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_max_size.c -o dque_max_size.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_key_erase.c -o dque_key_erase.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_key_find.c -o dque_key_find.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_key_insert.c -o dque_key_insert.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_back.c -o dque_back.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_front.c -o dque_front.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_get_data.c -o dque_get_data.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_set_data.c -o dque_set_data.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_begin.c -o dque_begin.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_next.c -o dque_next.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_end.c -o dque_end.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_rbegin.c -o dque_rbegin.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_rnext.c -o dque_rnext.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_rend.c -o dque_rend.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_insert.c -o dque_insert.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_erase.c -o dque_erase.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_pop_back.c -o dque_pop_back.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_pop_front.c -o dque_pop_front.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_push_back.c -o dque_push_back.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_push_front.c -o dque_push_front.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_myalloc.c -o dque_myalloc.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_mydelete.c -o dque_mydelete.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_myfind.c -o dque_myfind.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_myinsert.c -o dque_myinsert.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_myscan.c -o dque_myscan.o
+gcc -c -O3 -Wall -g -lpthread -fPIC -march=x86-64 dque_mysearch.c -o dque_mysearch.o
+rm -f libdque.a
+ar -r libdque.a dque_create.o dque_destroy.o dque_error.o dque_options.o dque_empty.o dque_size.o dque_max_size.o dque_key_erase.o dque_key_find.o dque_key_insert.o dque_back.o dque_front.o dque_get_data.o dque_set_data.o dque_begin.o dque_next.o dque_end.o dque_rbegin.o dque_rnext.o dque_rend.o dque_insert.o dque_erase.o dque_pop_back.o dque_pop_front.o dque_push_back.o dque_push_front.o dque_myalloc.o dque_mydelete.o dque_myfind.o dque_myinsert.o dque_myscan.o dque_mysearch.o
+gcc -O3 -Wall -g -lpthread -fPIC -march=x86-64 -DTTAS test.c dque_util.c dque_util.h libdque.a -o test
+#./clang -fopencilk -fcilktool=cilkscale -O3 fib_test.c -o fib_test
+./clang -fopencilk -O3 -Wall -g -lpthread -fPIC -march=x86-64 -DTTAS fib_test.c -o fib_test_ttas
+./clang -fopencilk -O3 -Wall -g -lpthread -fPIC -march=x86-64 -DCMPXCHG fib_test.c -o fib_test_lockfree
+./clang -fopencilk -O3 -Wall -g -lpthread -fPIC -march=x86-64 -DTTAS qsort_test.c -o qsort_test_ttas
+./clang -fopencilk -O3 -Wall -g -lpthread -fPIC -march=x86-64 -DCMPXCHG qsort_test.c -o qsort_test_lockfree
+./clang -fopencilk -O3 -Wall -g -lpthread -fPIC -march=x86-64 -DTTAS chess_test.c -o chess_test_ttas
+./clang -fopencilk -O3 -Wall -g -lpthread -fPIC -march=x86-64 -DCMPXCHG chess_test.c -o chess_test_lockfree
+--------------------------------------
+test test-spinlock-ttas
+--------------------------------------
+0.069221	0.069134	0.069332	
+0.125921	0.125180	0.130529	
+0.132005	0.134037	0.132110	
+0.136028	0.130384	0.128949	
+0.142996	0.148270	0.150291	
+--------------------------------------
+Deque - Functional Correctness tests
+--------------------------------------
+
+------------------------------
+testing options() with no queue
+dque_options (DQUEOPT_HEADSIZ):                                             Pass
+qhead size: 48
+dque_options (DQUEOPT_NODESIZ):                                             Pass
+qnode size: 24
+
+------------------------------
+testing invalid create() and destroy() function calls
+dque_create (invalid ptr to ptr to queue):                                  Pass
+dque_create (invalid buffer size):                                          Pass
+dque_create (invalid pointer to buffer):                                    Pass
+dque_create (invalid node count):                                           Pass
+dque_destroy(invalid ptr to ptr to queue):                                  Pass
+dque_destroy(invalid pointer to queue):                                     Pass
+
+------------------------------
+testing create() with static memory, add static memory with options()
+dque_create (using static memory):                                          Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back (no allocation allowed):                                     Pass
+dque_options (DQUEOPT_NOALLOC):                                             Pass
+dque_push_back:                                                             Pass
+dque_destroy (using static memory):                                         Pass
+
+------------------------------
+testing dynamic create() function calls
+dque_create (using dynamic memory):                                         Pass
+dque_options (DQUEOPT_VERSION):                                             Pass
+version 1.1
+dque_empty:                                                                 Pass
+empty queue: True
+
+------------------------------
+testing invalid calls to size() and max_size()
+dque_size (invalid pointer to queue):                                       Pass
+dque_size (invalid pointer to data):                                        Pass
+dque_max_size (invalid pointer to queue):                                   Pass
+dque_max_size (invalid pointer to data):                                    Pass
+
+size and maxsize should both be 0
+dque_size:                                                                  Pass
+    size: 0
+dque_max_size:                                                              Pass
+max size: 0
+
+------------------------------
+testing invalid calls to back() and front()
+dque_back (invalid pointer to queue):                                       Pass
+dque_back (invalid ptr to ptr to data):                                     Pass
+dque_front (invalid pointer to queue):                                      Pass
+dque_front (invalid ptr to ptr to data):                                    Pass
+
+------------------------------
+testing invalid calls to empty(), error(), and error_len()
+dque_empty (invalid pointer to queue):                                      Pass
+dque_empty (invalid pointer to data):                                       Pass
+dque_error (invalid pointer to buffer):                                     Pass
+dque_error (invalid buffer size):                                           Pass
+dque_error_len (invalid pointer to data):                                   Pass
+dque_error_len (unknown error code):                                        Pass
+
+------------------------------
+testing invalid calls to insert(), and erase() (delete)
+dque_insert (invalid pointer to queue):                                     Pass
+dque_insert (invalid pointer to data):                                      Pass
+dque_erase (invalid pointer to queue):                                      Pass
+dque_erase (invalid ptr to ptr to data):                                    Pass
+dque_erase (invalid pointer to iter):                                       Pass
+
+------------------------------
+testing invalid calls to push_*() and pop_*()
+dque_push_back (invalid pointer to queue):                                  Pass
+dque_push_back (invalid pointer to data):                                   Pass
+dque_push_front(invalid pointer to queue):                                  Pass
+dque_push_front(invalid pointer to data):                                   Pass
+dque_pop_back  (invalid pointer to queue):                                  Pass
+dque_pop_back  (invalid data pointer):                                      Pass
+dque_pop_front (invalid pointer to queue):                                  Pass
+dque_pop_front (invalid data pointer):                                      Pass
+
+------------------------------
+testing invalid calls to iterator function
+dque_begin (invalid pointer to queue):                                      Pass
+dque_begin (invalid ptr to ptr to iter):                                    Pass
+dque_rbegin (invalid pointer to queue):                                     Pass
+dque_rbegin (invalid ptr to ptr to iter):                                   Pass
+dque_next (invalid pointer to queue):                                       Pass
+dque_next (invalid ptr to ptr to iter):                                     Pass
+dque_next (invalid ptr to iterator):                                        Pass
+dque_rnext (invalid pointer to queue):                                      Pass
+dque_rnext (invalid ptr to ptr to iter):                                    Pass
+dque_rnext (invalid ptr to iterator):                                       Pass
+dque_end (invalid pointer to queue):                                        Pass
+dque_end (invalid ptr to ptr to iter):                                      Pass
+dque_rend (invalid pointer to queue):                                       Pass
+dque_rend (invalid ptr to ptr to iter):                                     Pass
+
+------------------------------
+testing invalid calls to key_*()
+dque_key_find (invalid pointer to queue):                                   Pass
+dque_key_find (invalid pointer to key):                                     Pass
+dque_key_find (invalid pointer to comp):                                    Pass
+dque_key_find (invalid ptr to ptr to iter):                                 Pass
+dque_key_find (empty queue):                                                Pass
+
+dque_key_insert (invalid pointer to queue):                                 Pass
+dque_key_insert (invalid pointer to comp):                                  Pass
+
+dque_key_erase (invalid pointer to queue):                                  Pass
+dque_key_erase (invalid pointer to key):                                    Pass
+dque_key_erase (invalid pointer to comp):                                   Pass
+dque_key_erase (invalid ptr to ptr to data):                                Pass
+
+------------------------------
+use options() to force two dynamic memory allocations
+dque_options (set node count to 6):                                         Pass
+fill queue with ten integer elements to force allocations
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+size and maxsize should both be 10, if so, two allocations of 6 were successful
+dque_size:                                                                  Pass
+    size: 10
+dque_max_size:                                                              Pass
+max size: 10
+print queue of integers using forward iterator then reverse iterator
+ 0 1 2 3 4 5 6 7 8 9
+ 9 8 7 6 5 4 3 2 1 0
+
+------------------------------
+testing invalid calls to get_data(), and set_data()
+dque_get_data (invalid pointer to queue):                                   Pass
+dque_get_data (invalid ptr to ptr to data):                                 Pass
+dque_set_data (invalid pointer to queue):                                   Pass
+dque_set_data (invalid ptr to ptr to data):                                 Pass
+
+------------------------------
+test key_*() functions
+dque_key_erase (remove zero node):                                          Pass
+dque_key_erase data == zero node:                                           Pass
+dque_key_erase (remove fifth node):                                         Pass
+dque_key_erase data == fifth node:                                          Pass
+dque_key_erase (remove ninth node):                                         Pass
+dque_key_erase data == ninth node:                                          Pass
+dque_key_erase (attempt to remove non-existent node):                       Pass
+ 1 2 3 4 6 7 8
+ 8 7 6 4 3 2 1
+
+remove all but one integer elements
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+
+print queue of integers using forward iterator then reverse iterator
+ 8
+ 8
+
+compare pointers returned by dque_back() and dque_front(), should be the same
+dque_back:                                                                  Pass
+dque_front:                                                                 Pass
+dque_back == dque_front:                                                    Pass
+
+compare iterators returned by dque_begin() and dque_rbegin(), should be the same
+dque_begin:                                                                 Pass
+dque_rbegin:                                                                Pass
+dque_begin == dque_rbegin:                                                  Pass
+
+insert and erase at the front, back, and middle of the queue
+dque_insert:                                                                Pass
+dque_insert:                                                                Pass
+dque_insert:                                                                Pass
+ 0 5 8 9
+ 9 8 5 0
+dque_rnext:                                                                 Pass
+dque_delete:                                                                Pass
+dque_delete data == fifth node:                                             Pass
+dque_begin:                                                                 Pass
+dque_delete:                                                                Pass
+dque_delete data == zero node:                                              Pass
+dque_rbegin:                                                                Pass
+dque_delete:                                                                Pass
+dque_delete data == ninth node:                                             Pass
+ 8
+ 8
+
+remove last integer elements
+dque_pop_front:                                                             Pass
+dque_empty:                                                                 Pass
+empty: True
+dque_destroy (invalid qhead pointer):                                       Pass
+dque_destroy (invalid queue pointer):                                       Pass
+dque_destroy (using dynamic memory):                                        Pass
+
+------------------------------
+fill queue with ten random order integer elements using key_insert
+dque_create (using dynamic memory):                                         Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+
+print queue of integers using forward iterator
+ 0 0 1 2 3 4 4 6 8 9
+
+remove all integer elements
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+
+------------------------------
+turn off duplication, fill queue with eight random order integer elements
+dque_options (DQUEOPT_NODUPE):                                              Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert (with duplicate key):                                       Pass
+dque_destroy (using dynamic memory):                                        Pass
+
+------------------------------
+fill queue with five string elements
+dque_create (using dynamic memory):                                         Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+dque_push_back:                                                             Pass
+
+print queue of strings using forward iterator then reverse iterator
+ zero one two three four
+ four three two one zero
+
+------------------------------
+check dque_back() and dque_front()
+dque_back:                                                                  Pass
+dque_back data == back of queue:                                            Pass
+dque_front:                                                                 Pass
+dque_front data == front of queue:                                          Pass
+
+remove the five string elements
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_empty:                                                                 Pass
+empty: True
+
+------------------------------
+fill queue with five record elements using dque_key_insert with integer comparison
+  this works because the first field in the record is an integer
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+dque_key_insert:                                                            Pass
+
+print queue of records using forward iterator then reverse iterator
+ 1000 1076 1103 1145 1172
+ 1172 1145 1103 1076 1000
+dque_back:                                                                  Pass
+dque_back data == back of queue:                                            Pass
+dque_front:                                                                 Pass
+dque_front data == front of queue:                                          Pass
+
+look for record with a year of 2022
+dque_key_find:                                                              Pass
+rec data == 2022:                                                           Pass
+key_find: 1145, 2022, "Hello World", classes: 123 456 707 0 0 0 0
+
+remove the five record elements
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+dque_pop_front:                                                             Pass
+
+dque_destory (using dynamic memory):                                        Pass
+
+------------------------------
+fill queue with five order integer elements using stk_push
+dque_create (using dynamic memory):                                         Pass
+dque_stk_insert:                                                            Pass
+dque_stk_insert:                                                            Pass
+dque_stk_insert:                                                            Pass
+dque_stk_insert:                                                            Pass
+dque_stk_insert:                                                            Pass
+ 4 3 2 1 0
+dque_stk_empty == 0:                                                        Pass
+dque_stk_size  == 5:                                                        Pass
+dque_stk_top   == 4:                                                        Pass
+dque_stk_pop   == 4:                                                        Pass
+dque_stk_pop   == 3:                                                        Pass
+dque_stk_pop   == 2:                                                        Pass
+dque_stk_pop   == 1:                                                        Pass
+dque_stk_pop   == 0:                                                        Pass
+dque_stk_empty == 1:                                                        Pass
+
+------------------------------
+fill queue with five order integer elements using que_push
+dque_que_insert:                                                            Pass
+dque_que_insert:                                                            Pass
+dque_que_insert:                                                            Pass
+dque_que_insert:                                                            Pass
+dque_que_insert:                                                            Pass
+ 0 1 2 3 4
+dque_que_empty == 0:                                                        Pass
+dque_que_size  == 5:                                                        Pass
+dque_que_back  == 4:                                                        Pass
+dque_que_front == 0:                                                        Pass
+dque_que_pop   == 0:                                                        Pass
+dque_que_pop   == 1:                                                        Pass
+dque_que_pop   == 2:                                                        Pass
+dque_que_pop   == 3:                                                        Pass
+dque_que_pop   == 4:                                                        Pass
+dque_que_empty == 1:                                                        Pass
+
+dque_destory (using dynamic memory):                                        Pass
+
+------------------------------
+turn off duplication, fill queue with eight random order integer elements
+dque_pri_create (dynamic memory):                                           Pass
+dque_options (DQUEOPT_NODUPE):                                              Pass
+dque_pri_push:                                                              Pass
+dque_pri_push:                                                              Pass
+dque_pri_push:                                                              Pass
+dque_pri_push:                                                              Pass
+dque_pri_push:                                                              Pass
+dque_pri_push:                                                              Pass
+dque_pri_push:                                                              Pass
+dque_pri_push:                                                              Pass
+dque_pri_push (with duplicate key):                                         Pass
+dque_pri_push (with duplicate key):                                         Pass
+ 0 1 2 3 4 6 8 9
+dque_pri_empty == 0:                                                        Pass
+dque_pri_size  == 8:                                                        Pass
+dque_pri_top   == 0:                                                        Pass
+dque_pri_pop   == 0:                                                        Pass
+dque_pri_pop   == 1:                                                        Pass
+dque_pri_pop   == 2:                                                        Pass
+dque_pri_pop   == 3:                                                        Pass
+dque_pri_pop   == 4:                                                        Pass
+dque_pri_pop   == 6:                                                        Pass
+dque_pri_pop   == 8:                                                        Pass
+dque_pri_pop   == 9:                                                        Pass
+dque_pri_empty == 1:                                                        Pass
+dque_pri_destroy (dynamic memory):                                          Pass
+
+++++++++++++++++++++++++++++++++++++++++++
+DEQUE: HELLO WORLD!!!
+++++++++++++++++++++++++++++++++++++++++++
+
+++++++++++++++++++++++++++++++++++++++++++
+OVERALL DEQUE FUNCTIONAL TEST STATUS:                                       PASS
+++++++++++++++++++++++++++++++++++++++++++
+
+--------------------------------------
+ Fibonacci Test (Deque-Lock)
+--------------------------------------
+fib(40) = 102334155	Time(fib) = 6.473283273 sec
+fib(40) = 102334155	Time(fib) = 3.428466396 sec
+fib(40) = 102334155	Time(fib) = 1.879561993 sec
+fib(40) = 102334155	Time(fib) = 0.974483804 sec
+fib(40) = 102334155	Time(fib) = 0.561777013 sec
+--------------------------------------
+ Qsort Test - 1 Million Number Sorting (Deque Lock)
+--------------------------------------
+Time(sample_qsort) = 0.147121999 sec
+Time(sample_qsort) = 0.076352962 sec
+Time(sample_qsort) = 0.051296682 sec
+Time(sample_qsort) = 0.033350650 sec
+Time(sample_qsort) = 0.040521533 sec
+--------------------------------------
+ Chess Test - N Queens Problem - 16 (Deque-Lock)
+--------------------------------------
+Time(nqueens) = 54.884692193 sec
+Time(nqueens) = 26.909051486 sec
+Time(nqueens) = 14.038794475 sec
+Time(nqueens) = 7.737186424 sec
+Time(nqueens) = 4.030103844 sec
+--------------------------------------
+--------------------------------------
+--------------------------------------
+ Fibonacci Test (Deque-Lock-Free)
+--------------------------------------
+fib(40) = 102334155	Time(fib) = 6.336070122 sec
+fib(40) = 102334155	Time(fib) = 3.583641276 sec
+fib(40) = 102334155	Time(fib) = 1.746637238 sec
+fib(40) = 102334155	Time(fib) = 1.017470128 sec
+fib(40) = 102334155	Time(fib) = 0.562283373 sec
+--------------------------------------
+ Qsort Test - 1 Million Number Sorting (Deque-Lock-Free)
+--------------------------------------
+Time(sample_qsort) = 0.162515391 sec
+Time(sample_qsort) = 0.077189864 sec
+Time(sample_qsort) = 0.051138918 sec
+Time(sample_qsort) = 0.034772096 sec
+Time(sample_qsort) = 0.033427586 sec
+--------------------------------------
+ Chess Test - N Queens Problem - 8 (Deque-Lock-Free)
+--------------------------------------
+Time(nqueens) = 55.900155900 sec
+Time(nqueens) = 27.966672036 sec
+Time(nqueens) = 13.833592739 sec
+Time(nqueens) = 7.611913419 sec
+Time(nqueens) = 4.260948081 sec
+=========================================
+ END OF ALL TESTS
+=========================================
